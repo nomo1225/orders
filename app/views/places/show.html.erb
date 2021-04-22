@@ -1,0 +1,24 @@
+<h1>納品先一覧</h1>
+
+<table class="small">
+  <thead>
+    <tr>
+      <th style="width: 40%">社名</th>
+      <th style="width: 60%">住所・TEL</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @places.each do |place| %>
+      <tr>
+        <td><%= place.company %></td>
+        <td><%= place.address %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag import_places_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'インポート' %>
+<% end %>

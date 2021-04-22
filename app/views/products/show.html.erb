@@ -1,0 +1,40 @@
+<h1>商品一覧</h1>
+
+<table class="small">
+  <thead>
+    <tr>
+      <th style="width: 10%">仕入先</th>
+      <th style="width: 20%">品名</th>
+      <th style="width: 10%">詳細</th>
+      <th style="width: 15%">備考1</th>
+      <th style="width: 10%">備考2</th>
+      <th style="width: 5%">単位</th>
+      <th style="width: 5%">仕入単価</th>
+      <th style="width: 5%">NB売単価</th>
+      <th style="width: 5%">NK売単価</th>
+      <th style="width: 5%">TT売単価</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.supplier.truncate(7, omission: '…') %></td>
+        <td><%= product.name %></td>
+        <td><%= product.details %></td>
+        <td><%= product.remarks1 %></td>
+        <td><%= product.remarks2 %></td>
+        <td><%= product.unit %></td>
+        <td><%= product.purchase_price %></td>
+        <td><%= product.sale_price_nb %></td>
+        <td><%= product.sale_price_nk %></td>
+        <td><%= product.sale_price_tt %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag import_products_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'インポート' %>
+<% end %>
