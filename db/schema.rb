@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_012907) do
+ActiveRecord::Schema.define(version: 2021_04_22_052934) do
 
   create_table "places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "company"
@@ -34,4 +34,30 @@ ActiveRecord::Schema.define(version: 2021_04_22_012907) do
     t.integer "sale_price_tt"
   end
 
+  create_table "receiveds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "number"
+    t.date "desired_day"
+    t.string "name"
+    t.bigint "place_id"
+    t.bigint "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "seller_id"
+    t.index ["place_id"], name: "index_receiveds_on_place_id"
+    t.index ["product_id"], name: "index_receiveds_on_product_id"
+    t.index ["seller_id"], name: "index_receiveds_on_seller_id"
+  end
+
+  create_table "sellers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "company"
+    t.string "post_number"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "receiveds", "places"
+  add_foreign_key "receiveds", "products"
+  add_foreign_key "receiveds", "sellers"
 end

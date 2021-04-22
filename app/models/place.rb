@@ -1,4 +1,6 @@
 class Place < ApplicationRecord
+  has_many :receiveds
+  
   validates :company, presence: true
   validates :address, presence: true
   

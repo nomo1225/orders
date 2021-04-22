@@ -58,3 +58,5 @@ gem 'kaminari'
 gem 'roo' #excel.csv系を展開
 
 gem 'pry-rails'
+
+gem 'rails-i18n', '~> 5.1' 

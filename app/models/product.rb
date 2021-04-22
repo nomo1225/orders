@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  has_many :receiveds
+  
   validates :supplier, presence: true, length: {maximum: 30 }
   validates :name, presence: true, length: {maximum: 30 }
   validates :unit, presence: true, length: {maximum: 5 }

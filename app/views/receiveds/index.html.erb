@@ -1,0 +1,40 @@
+<header>
+  <%= link_to '新規発注追加', new_received_path %>
+  <%= link_to '販売先登録', sellers_path %>
+</header>
+<div class="card pc_area">
+  <div class="card-header c-height">
+    <h5 class="card-title text-center">受注一覧</h5>
+  </div>
+    <table class="table table-style small table-sm">
+      <thead>
+        <tr>
+          <th style="width:3%">ID</th>
+          <th style="width:8%">受注日</th>
+          <th style="width:8%">受注№</th>
+          <th style="width:18%">需要先</th>
+          <th style="width:5%">担当者</th>
+          <th style="width:8%">希望日</th>
+          <th style="width:24%">納品先</th>
+          <th style="width:19%">商品</th>
+          <th style="width:7%">数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @receiveds.each do |received| %>
+          <tr>
+            <td><%= received.id %></td>
+            <td><%= received.created_at.strftime("%Y-%m-%d") %></td>
+            <td><%= link_to received.number.truncate(10, omission: '…'), edit_received_path(received) %></td>
+            <td><%= received.seller.company.truncate(18, omission: '…') %></td>
+            <td><%= received.name %></td>
+            <td><%= received.desired_day %></td>
+            <td><%= received.place.company.truncate(18, omission: '…') %></td>
+            <td><%= received.product.name.truncate(16, omission: '…') %></td>
+            <td><%= received.quantity %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <%= paginate @receiveds %>
+    </table>
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  desired_day: 2021-04-22
+  name: MyString
+  place: one
+  product: one
+  quantity: 1
+
+two:
+  number: MyString
+  desired_day: 2021-04-22
+  name: MyString
+  place: two
+  product: two
+  quantity: 1
