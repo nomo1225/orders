@@ -1,7 +1,9 @@
-<header>
+<div>
   <%= link_to '新規発注追加', new_received_path %>
-  <%= link_to '販売先登録', sellers_path %>
-</header>
+  <%= link_to '販売先一覧', sellers_path %>
+  <%= link_to '納入先一覧', places_path %>
+  <%= link_to '商品一覧', products_path %>
+</div>
 <div class="card pc_area">
   <div class="card-header c-height">
     <h5 class="card-title text-center">受注一覧</h5>
@@ -15,9 +17,12 @@
           <th style="width:18%">需要先</th>
           <th style="width:5%">担当者</th>
           <th style="width:8%">希望日</th>
-          <th style="width:24%">納品先</th>
+          <th style="width:15%">納品先</th>
           <th style="width:19%">商品</th>
           <th style="width:7%">数量</th>
+          
+          <th style="width:7%">単価</th>
+          <th style="width:7%">金額</th>
         </tr>
       </thead>
       <tbody>
@@ -28,10 +33,29 @@
             <td><%= link_to received.number.truncate(10, omission: '…'), edit_received_path(received) %></td>
             <td><%= received.seller.company.truncate(18, omission: '…') %></td>
             <td><%= received.name %></td>
-            <td><%= received.desired_day %></td>
-            <td><%= received.place.company.truncate(18, omission: '…') %></td>
+            <td><%= received.desired_day.strftime("%m-%d") %></td>
+            <td><%= received.place.company.truncate(10, omission: '…') %></td>
             <td><%= received.product.name.truncate(16, omission: '…') %></td>
-            <td><%= received.quantity %></td>
+            <td><%= received.quantity %><%= received.product.unit %></td>
+            
+            <td>
+              <% if received.seller.company.include?("日本ﾎﾞﾃﾞｰ") %>
+                <%= received.product.sale_price_nb.to_s(:delimited) %>
+              <% elsif received.seller.company.include?("日東") %>
+                <%= received.product.sale_price_nk.to_s(:delimited) %> <!--.to_s(:delimited)数値に変換して桁区切り-->
+              <% elsif received.seller.companyinclude?("トランテックス") %>
+                <%= received.product.sale_price_tt.to_s(:delimited) %>
+              <% end %>
+            </td>
+            <td>
+              <% if received.seller.company.include?("日本ﾎﾞﾃﾞｰ") %>
+                <%= (received.quantity * received.product.sale_price_nb).to_s(:delimited) %>
+              <% elsif received.seller.company.include?("日東") %>
+                <%= (received.quantity * received.product.sale_price_nk).to_s(:delimited) %>
+              <% elsif received.seller.companyinclude?("トランテックス") %>
+                <%= (received.quantity * received.product.sale_price_tt).to_s(:delimited) %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
