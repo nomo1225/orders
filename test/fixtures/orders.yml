@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  answered_day: 2021-04-23
+  received: one
+
+two:
+  number: MyString
+  answered_day: 2021-04-23
+  received: two

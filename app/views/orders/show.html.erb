@@ -1,0 +1,49 @@
+<div class="order_sheet">
+  <div class="text-right">
+    <%= @order.created_at.strftime("20%y年%m月%d日") %>
+  </div>
+  <div class="text-center">
+    <h2>発注書</h2>
+  </div>
+  <div class="text-right number">
+    発注№,<%= @order.number %>
+  </div>
+  <div class="order_from">
+    <div class="destination"> <!--宛名-->
+      <%= @order.received.product.supplier %> 御中
+    </div>
+    <div class="logo">
+      <%= image_tag '/ロゴ.jpg',class: "image" %>
+    </div>
+    <div class="company text-right">
+      OOO株式会社<br>
+      本社  〒000-0000 東京都中央区<br>
+      TEL 00-0000-0000  FAX 00-0000-0000<br>
+      営業部　〇〇
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">品名</th>
+      <th scope="col">備考</th>
+      <th scope="col">数量</th>
+      <th scope="col">単位</th>
+      <th scope="col">単価</th>
+      <th scope="col">金額</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @order.received.product.name %></td>
+      <td><%= @order.received.product.details %></td>
+      <td><%= @order.received.quantity %></td>
+      <td><%= @order.received.product.unit %></td>
+      <td><%= @order.received.product.purchase_price.to_s(:delimited) %></td>
+      <td><%= (@order.received.quantity * @order.received.product.purchase_price).to_s(:delimited) %></td>
+    </tr>
+    
+  </tbody>
+</table>

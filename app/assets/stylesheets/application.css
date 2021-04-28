@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .order_sheet {
+  width: 850px;
+ }
+ .logo image{
+  display: block;
+ }
+ .logo {
+  text-align: right;
+ }
+ .number {
+  margin-top: 50px;
+  font-size: 25px;
+ }

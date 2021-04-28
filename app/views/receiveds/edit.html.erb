@@ -1,5 +1,9 @@
 <div class="text-center">
   <h1>受注データ編集</h1>
+  <%= link_to '発注・納期回答編集', new_received_order_path(@received) %>
+  <% if @received.order.present? %>
+    <%= link_to '発注書', order_path(@received.order) %>
+  <% end %>
 </div>
 
 <div class="row col-sm-10 offset-sm-3">

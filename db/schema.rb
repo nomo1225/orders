@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_052934) do
+ActiveRecord::Schema.define(version: 2021_04_23_074852) do
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "number"
+    t.date "answered_day"
+    t.bigint "received_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["received_id"], name: "index_orders_on_received_id"
+  end
 
   create_table "places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "company"
@@ -57,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_052934) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "orders", "receiveds"
   add_foreign_key "receiveds", "places"
   add_foreign_key "receiveds", "products"
   add_foreign_key "receiveds", "sellers"

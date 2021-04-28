@@ -13,5 +13,8 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   
-  resources :receiveds
+  resources :receiveds do
+   resources :orders, only: [:new]
+  end
+  resources :orders, only:[:create, :show, :edit, :update, :destroy]
 end

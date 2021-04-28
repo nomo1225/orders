@@ -1,0 +1,19 @@
+<div class="row col-sm-10 offset-sm-3">
+
+    <%= form_with(model: @order, local: true) do |f| %>
+       <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="form-inline">
+        <%= f.label :number, '受注№' %>
+        <%= f.text_field :number, class: 'form-control' %>
+      </div>
+      
+      <div class="form-inline">
+        <%= f.label :answered_day, '回答日' %>
+        <%= f.date_field :answered_day, class: 'form-control' %>
+      </div>
+      
+      <%= f.hidden_field :received_id, value: @received_id %>
+      <%= f.submit '登録する', class: 'btn btn-primary btn-block' %>
+    <% end %>
+</div>
